@@ -1,0 +1,123 @@
+custom:
+  secrets: ${file(.secrets.yaml):${self:provider.stage}}
+
+provider:
+  environment:
+    WIFI_SSID: ${self:custom.secrets.WIFI_SSID}
+    WIFI_PASSWORD: ${self:custom.secrets.WIFI_PASSWORD}
+
+esphome:
+  name: levi
+  friendly_name: Levi
+  min_version: 2024.6.0
+  name_add_mac_suffix: false
+  platformio_options:
+    board_build.flash_mode: dio
+  project:
+    name: esphome.web
+    version: dev
+
+wifi:
+  ssid: WIFI_SSID
+  password: WIFI_PASSWORD
+
+esp32:
+  board: esp32-s3-devkitc-1
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+# Allow Over-The-Air updates
+ota:
+  - platform: esphome
+
+# Allow provisioning Wi-Fi via serial
+improv_serial:
+
+dashboard_import:
+  package_import_url: github://esphome/firmware/esphome-web/esp32s3.yaml@main
+  import_full_config: true
+
+# Sets up Bluetooth LE (Only on ESP32) to allow the user
+# to provision wifi credentials to the device.
+esp32_improv:
+  authorizer: none
+
+# To have a "next url" for improv serial
+web_server:
+
+#display config for TDS on screen TODO line 90, id(tds_value vs. something else), TODO pin numbers are wack
+spi:
+  clk_pin: GPIO18
+  mosi_pin: GPIO19
+
+display:
+  - platform: ili9xxx
+    id: my_display
+    model: S3BOX
+    data_rate: 40MHz
+
+    cs_pin: 5
+    dc_pin: 4
+    reset_pin:
+      number: 48
+      inverted: true
+    update_interval: never
+    invert_colors: false
+    lambda: |-
+      it.fill(COLOR::BLACK);
+      it.image(0, 0, id(background_image));
+      it.printf(180, 10, id(font1), COLOR::WHITE, "%.1f", id(tds_value).state);
+
+image:
+  - file: "levi.png"
+    id: background_image
+    resize: 240x320
+
+#font?!
+font:
+  - file: "ostrich-regular.ttf"
+    id: font1
+    size: 20
+
+interval:
+  - interval: 5s
+    then:
+      - component.update: my_display
+
+# thank you perplexity -- TDS sensor and integration
+sensor:
+  - platform: adc
+    pin: GPIO10
+    name: "TDS Sensor Raw"
+    update_interval: 40ms
+    attenuation: 11db
+    filters:
+      - median:
+          window_size: 30
+          send_every: 30
+          send_first_at: 1
+    on_value:
+      then:
+        - lambda: |-
+            float voltage = x * 3.3 / 4095.0;
+            float temperature = 22.0;
+            float compensationCoefficient = 1.0 + 0.02 * (temperature - 25.0);
+            float compensationVoltage = voltage / compensationCoefficient;
+            float tdsValue = (133.42 * compensationVoltage * compensationVoltage * compensationVoltage 
+                        - 255.86 * compensationVoltage * compensationVoltage 
+                        + 857.39 * compensationVoltage) * 0.5;
+            tdsValue *= 1000;  // Scale up by 1000
+            id(tds_value).publish_state(round(tdsValue));
+
+  - platform: template
+    name: "TDS Value"
+    id: tds_value
+    unit_of_measurement: "ppm"
+    accuracy_decimals: 0
+    update_interval: 60s

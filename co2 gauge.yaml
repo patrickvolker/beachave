@@ -1,0 +1,80 @@
+type: gauge
+entity: sensor.apollo_air_1_bcd24c_co2
+needle: true
+theme: Material Rounded No Mod Dark
+min: 0
+max: 2000
+name: co2 ppm
+segments:
+  - from: 0
+    color: "#000066"
+  - from: 100
+    color: "#03086e"
+  - from: 200
+    color: "#050f75"
+  - from: 225
+    color: "#08177d"
+  - from: 250
+    color: "#0a1f85"
+  - from: 275
+    color: "#0d268c"
+  - from: 300
+    color: "#0f2e94"
+  - from: 325
+    color: "#12369c"
+  - from: 350
+    color: "#143da3"
+  - from: 375
+    color: "#1745ab"
+  - from: 400
+    color: "#1a4cb2"
+  - from: 425
+    color: "#1c54ba"
+  - from: 450
+    color: "#1f5cc2"
+  - from: 475
+    color: "#2163c9"
+  - from: 500
+    color: "#246bd1"
+  - from: 525
+    color: "#2673d9"
+  - from: 550
+    color: "#297ae0"
+  - from: 575
+    color: "#2b82e8"
+  - from: 600
+    color: "#2e8af0"
+  - from: 625
+    color: "#3883e4"
+  - from: 650
+    color: "#437cd8"
+  - from: 675
+    color: "#4d75cc"
+  - from: 700
+    color: "#586ec0"
+  - from: 800
+    color: "#6268b4"
+  - from: 900
+    color: "#6d61a8"
+  - from: 1000
+    color: "#775a9c"
+  - from: 1100
+    color: "#825390"
+  - from: 1200
+    color: "#8c4c84"
+  - from: 1300
+    color: "#964578"
+  - from: 1400
+    color: "#a13e6c"
+  - from: 1500
+    color: "#ab3760"
+  - from: 1600
+    color: "#b63054"
+  - from: 1700
+    color: "#c02948"
+  - from: 1800
+    color: "#cb223c"
+  - from: 1900
+    color: "#d51c30"
+  - from: 2000
+    color: "#ff00"

@@ -1,0 +1,80 @@
+type: gauge
+entity: sensor.heat_pump_water_heater_gallons
+needle: true
+theme: Material Rounded No Mod Dark
+min: 0
+max: 50
+name: hot water gallons
+segments:
+  - from: 0
+    color: "#000066"
+  - from: 16
+    color: "#03086e"
+  - from: 17
+    color: "#050f75"
+  - from: 18
+    color: "#08177d"
+  - from: 19
+    color: "#0a1f85"
+  - from: 20
+    color: "#0d268c"
+  - from: 21
+    color: "#0f2e94"
+  - from: 22
+    color: "#12369c"
+  - from: 23
+    color: "#143da3"
+  - from: 24
+    color: "#1745ab"
+  - from: 25
+    color: "#1a4cb2"
+  - from: 26
+    color: "#1c54ba"
+  - from: 27
+    color: "#1f5cc2"
+  - from: 28
+    color: "#2163c9"
+  - from: 29
+    color: "#246bd1"
+  - from: 30
+    color: "#2f66c7"
+  - from: 31
+    color: "#3a60bc"
+  - from: 32
+    color: "#455bb2"
+  - from: 33
+    color: "#5056a7"
+  - from: 34
+    color: "#5b509d"
+  - from: 35
+    color: "#664b92"
+  - from: 36
+    color: "#714688"
+  - from: 37
+    color: "#7c407d"
+  - from: 38
+    color: "#873b73"
+  - from: 39
+    color: "#923668"
+  - from: 40
+    color: "#9c305e"
+  - from: 41
+    color: "#a72b54"
+  - from: 42
+    color: "#b22549"
+  - from: 43
+    color: "#bd203f"
+  - from: 44
+    color: "#c81b34"
+  - from: 45
+    color: "#d3152a"
+  - from: 46
+    color: "#de101f"
+  - from: 47
+    color: "#e90b15"
+  - from: 48
+    color: "#f4050a"
+  - from: 49
+    color: "#ff0000"
+  - from: 50
+    color: "#ff0000"

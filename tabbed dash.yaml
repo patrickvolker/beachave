@@ -1,0 +1,535 @@
+views:
+  - type: sections
+    max_columns: 1
+    title: Beach Ave
+    path: sections
+    theme: ios-dark-mode-blue-red
+    background: var(--background-image)
+    sections:
+      - card:
+          - type: heading
+            heading: First Floor
+        type: grid
+        cards:
+          - type: custom:tabbed-card
+            styles:
+              "--mdc-tab-text-label-color-default": gray
+              "--mdc-tab-height": 64px
+              "--mdc-tab-horizontal-padding": none
+              "--mdc-tab-color-default": rgba(255, 197, 0, 0.99)
+            options?:
+              defaultTabIndex?: 1
+            tabs:
+              - card:
+                  square: false
+                  columns: 2
+                  type: grid
+                  cards:
+                    - type: media-control
+                      entity: media_player.front_room_speaker
+                      name: Speaker
+                      show_state: null
+                    - type: button
+                      entity: script.front_room_toggler
+                      name: Front Room [All]
+                      hold_action:
+                        action: more-info
+                      tap_action:
+                        action: toggle
+                      icon_height: 20px
+                      icon: mdi:sofa
+                    - type: tile
+                      entity: light.front_room_monstera_lamp
+                      icon: mdi:grass
+                      name: Monstera Lamp
+                      tap_action:
+                        action: toggle
+                    - type: tile
+                      entity: light.blue_chair_lamp
+                      icon: mdi:seat-recline-normal
+                      hold_action:
+                        action: more-info
+                      tap_action:
+                        action: toggle
+                    - type: tile
+                      entity: light.piano_lamp_new
+                      icon: mdi:piano
+                      name: Piano Lamp
+                      hold_action:
+                        action: more-info
+                      tap_action:
+                        action: toggle
+                    - type: tile
+                      entity: light.green_couch_lamp
+                      icon: mdi:lamp
+                      tap_action:
+                        action: toggle
+                      hold_action:
+                        action: more-info
+                    - type: tile
+                      entity: light.front_porch_light
+                      icon: mdi:wall-sconce
+                      name: Porch Light
+                      hold_action:
+                        action: more-info
+                      tap_action:
+                        action: toggle
+                attributes:
+                  label: Front Room
+              - card:
+                  square: false
+                  columns: 2
+                  type: grid
+                  cards:
+                    - type: media-control
+                      entity: media_player.kitchen_display
+                      name: Display
+                    - type: button
+                      entity: script.kitchen_toggler
+                      name: Kitchen Ceiling
+                      hold_action:
+                        action: more-info
+                      tap_action:
+                        action: toggle
+                      icon_height: 20px
+                    - type: button
+                      entity: script.dining_toggler
+                      name: Dining Room
+                      icon: mdi:table-chair
+                      icon_height: 20px
+                      hold_action:
+                        action: more-info
+                      tap_action:
+                        action: toggle
+                    - type: button
+                      tap_action:
+                        action: call-service
+                        service: vacuum.send_command
+                        data:
+                          command: start
+                          params:
+                            pmap_id: NlrYuIbRSwCiPnadv2jRHg
+                            regions:
+                              - region_id: "1"
+                        target:
+                          entity_id: vacuum.roomba
+                      name: Clean Kitchen
+                      icon: mdi:broom
+                      icon_height: 20px
+                      entity: vacuum.roomba
+                      show_state: false
+                attributes:
+                  label: Kitchen
+              - card:
+                  square: false
+                  columns: 2
+                  type: grid
+                  cards:
+                    - type: media-control
+                      entity: media_player.living_room_tv_3
+                      name: TV
+                    - type: tile
+                      entity: light.living_room_tv_strip
+                      name: Lightstrip
+                      icon: mdi:led-strip-variant
+                      hold_action:
+                        action: more-info
+                      tap_action:
+                        action: toggle
+                    - type: tile
+                      entity: light.living_room_bonnie_lamp
+                      name: Bonnie Lamp
+                      icon: mdi:lamp
+                      hold_action:
+                        action: more-info
+                      tap_action:
+                        action: toggle
+                    - type: tile
+                      entity: light.living_room_pat_lamp
+                      name: Pat Lamp
+                      icon: mdi:lamp
+                      hold_action:
+                        action: more-info
+                      tap_action:
+                        action: toggle
+                attributes:
+                  label: Den
+            layout_options:
+              grid_columns: full
+      - type: grid
+        cards:
+          - type: custom:tabbed-card
+            styles:
+              "--mdc-tab-text-label-color-default": gray
+              "--mdc-tab-height": 64px
+              "--mdc-tab-horizontal-padding": none
+              "--mdc-tab-color-default": rgba(255, 197, 0, 0.99)
+            options?:
+              defaultTabIndex?: 1
+            tabs:
+              - card:
+                  square: false
+                  columns: 2
+                  type: grid
+                  cards:
+                    - type: tile
+                      entity: light.bonnie_desk_lamp
+                      name: Desk Lamp
+                      icon: mdi:lamp
+                      tap_action:
+                        action: toggle
+                      hold_action:
+                        action: more-info
+                      icon_height: 20px
+                    - type: tile
+                      entity: light.bedroom_bonnie_lamp
+                      name: Bonnie Lamp
+                      icon: mdi:wall-sconce
+                      tap_action:
+                        action: toggle
+                      hold_action:
+                        action: more-info
+                      icon_height: 20px
+                    - type: tile
+                      entity: light.bedroom_pat_lamp
+                      name: Pat Lamp
+                      icon: mdi:wall-sconce
+                      tap_action:
+                        action: toggle
+                      hold_action:
+                        action: more-info
+                      icon_height: 20px
+                    - type: tile
+                      entity: switch.waffles_plug
+                      name: Fan
+                      icon: mdi:fan
+                      tap_action:
+                        action: toggle
+                      icon_height: 20px
+                    - type: tile
+                      entity: switch.hallway_lamp
+                      icon: mdi:floor-lamp
+                      tap_action:
+                        action: toggle
+                      icon_height: 20px
+                attributes:
+                  label: Bedroom
+              - card:
+                  square: false
+                  columns: 2
+                  type: grid
+                  cards:
+                    - type: tile
+                      entity: light.burnham_cove_light
+                      name: Cove Light
+                      icon: mdi:led-strip-variant
+                      tap_action:
+                        action: toggle
+                      hold_action:
+                        action: more-info
+                      icon_height: 20px
+                    - type: tile
+                      entity: light.burnham_floor_lamp
+                      name: Floor Lamp
+                      icon: mdi:floor-lamp
+                      tap_action:
+                        action: toggle
+                      hold_action:
+                        action: more-info
+                      icon_height: 20px
+                    - type: tile
+                      entity: light.bernie_nightstand_lamp
+                      icon: mdi:lamp
+                      name: Nightstand Lamp
+                      tap_action:
+                        action: toggle
+                      hold_action:
+                        action: more-info
+                      icon_height: 20px
+                attributes:
+                  label: BWV HQ
+              - card:
+                  square: false
+                  columns: 2
+                  type: grid
+                  cards:
+                    - type: tile
+                      entity: light.upstairs_bathroom_1_2
+                      icon: mdi:wall-sconce
+                      name: Left
+                      tap_action:
+                        action: toggle
+                      hold_action:
+                        action: more-info
+                      icon_height: 20px
+                    - type: tile
+                      entity: light.upstairs_bathroom_2
+                      icon: mdi:wall-sconce
+                      name: Right
+                      tap_action:
+                        action: toggle
+                      hold_action:
+                        action: more-info
+                      icon_height: 20px
+                attributes:
+                  label: Bathroom
+      - type: grid
+        cards:
+          - type: custom:tabbed-card
+            styles:
+              "--mdc-tab-text-label-color-default": gray
+              "--mdc-tab-height": 64px
+              "--mdc-tab-horizontal-padding": none
+              "--mdc-tab-color-default": rgba(255, 197, 0, 0.99)
+            options?:
+              defaultTabIndex?: 1
+            tabs:
+              - card:
+                  square: false
+                  columns: 2
+                  type: grid
+                  cards:
+                    - type: media-control
+                      entity: media_player.basement_speaker
+                      name: Speaker
+                      icon_height: 20px
+                    - type: media-control
+                      entity: media_player.basement_tv
+                      name: Projector
+                      tap_action:
+                        action: toggle
+                      hold_action:
+                        action: more-info
+                      icon_height: 20px
+                    - type: tile
+                      entity: switch.basement_christmas_lights
+                      name: Christmas Lights
+                      icon: mdi:string-lights
+                      tap_action:
+                        action: toggle
+                      hold_action:
+                        action: more-info
+                      icon_height: 20px
+                    - type: tile
+                      entity: light.basement_floor_lamp
+                      name: Floor Lamp
+                      icon: mdi:floor-lamp-torchiere
+                      tap_action:
+                        action: toggle
+                      icon_height: 20px
+                      hold_action:
+                        action: more-info
+                    - type: tile
+                      entity: switch.basement_orb_lamp
+                      icon: mdi:globe-model
+                      tap_action:
+                        action: toggle
+                      icon_height: 20px
+                    - type: tile
+                      entity: light.basement_stairwell
+                      icon: mdi:coach-lamp
+                      tap_action:
+                        action: toggle
+                      hold_action:
+                        action: more-info
+                      icon_height: 20px
+                attributes:
+                  label: Party Zone
+              - card:
+                  square: false
+                  columns: 2
+                  type: grid
+                  cards:
+                    - type: media-control
+                      entity: media_player.office_monitor
+                      name: Monitor
+                      icon: mdi:monitor-screenshot
+                      tap_action:
+                        action: toggle
+                      hold_action:
+                        action: more-info
+                      icon_height: 20px
+                    - type: tile
+                      entity: switch.office_christmas_lights
+                      name: Christmas Lights
+                      icon: mdi:string-lights
+                      tap_action:
+                        action: toggle
+                      hold_action:
+                        action: more-info
+                      icon_height: 20px
+                    - type: tile
+                      entity: light.monitor_backlight
+                      name: Monitor Backlight
+                      icon: mdi:led-strip-variant
+                      tap_action:
+                        action: toggle
+                      hold_action:
+                        action: more-info
+                      icon_height: 20px
+                    - type: tile
+                      entity: light.office_ceiling_strip
+                      icon: mdi:led-strip-variant
+                      name: Ceiling Strip
+                      tap_action:
+                        action: toggle
+                      hold_action:
+                        action: more-info
+                      icon_height: 20px
+                    - type: tile
+                      entity: light.office_floor_lamp
+                      icon: mdi:floor-lamp-torchiere
+                      name: Floor Lamp
+                      tap_action:
+                        action: toggle
+                      hold_action:
+                        action: more-info
+                      icon_height: 20px
+                    - type: tile
+                      entity: switch.office_fans
+                      icon: mdi:safe-square-outline
+                      name: Cabinet Fans
+                      tap_action:
+                        action: toggle
+                      hold_action:
+                        action: more-info
+                      icon_height: 20px
+                    - type: tile
+                      entity: switch.office_window_light
+                      icon: mdi:vanity-light
+                      name: Hydro Lights
+                      tap_action:
+                        action: toggle
+                      hold_action:
+                        action: more-info
+                      icon_height: 20px
+                    - type: tile
+                      entity: switch.office_cabinet_lights
+                      icon: mdi:vanity-light
+                      name: Cabinet Lights
+                      tap_action:
+                        action: toggle
+                      hold_action:
+                        action: more-info
+                      icon_height: 20px
+                attributes:
+                  label: Office
+              - card:
+                  square: false
+                  columns: 2
+                  type: grid
+                  cards:
+                    - type: tile
+                      entity: light.laundry_room_light
+                      icon: mdi:ceiling-light
+                      name: Ceiling
+                      tap_action:
+                        action: toggle
+                      hold_action:
+                        action: more-info
+                      icon_height: 20px
+                    - type: tile
+                      entity: switch.cat_fountain
+                      icon: mdi:fountain
+                      name: Cat Fountain
+                      tap_action:
+                        action: toggle
+                      hold_action:
+                        action: more-info
+                      icon_height: 20px
+                    - type: tile
+                      entity: sensor.poopbox_3_0_litter_level
+                      icon: mdi:island
+                      name: Litter Level
+                      tap_action:
+                        action: toggle
+                      hold_action:
+                        action: more-info
+                      icon_height: 20px
+                    - type: tile
+                      entity: sensor.poopbox_3_0_waste_drawer
+                      icon: mdi:toilet
+                      name: Empty at 90
+                      tap_action:
+                        action: toggle
+                      hold_action:
+                        action: more-info
+                      icon_height: 20px
+                    - type: tile
+                      entity: light.garage_1
+                      name: Left
+                      icon: mdi:wall-sconce
+                      tap_action:
+                        action: toggle
+                      hold_action:
+                        action: more-info
+                      icon_height: 20px
+                    - type: tile
+                      entity: light.garage_2
+                      name: Right
+                      icon: mdi:wall-sconce
+                      tap_action:
+                        action: toggle
+                      hold_action:
+                        action: more-info
+                      icon_height: 20px
+                attributes:
+                  label: Laundry
+      - cards:
+          - type: custom:bootstrap-grid-card
+            class: container-fluid g-0
+            cards:
+              - type: row
+                title: Calendar
+                class: row
+                cards:
+                  - type: custom:week-planner-card
+                    calendars:
+                      - entity: calendar.tubbslife
+                        name: Pat
+                        color: darkgreen
+                      - entity: calendar.bonnie
+                        name: Bonnie
+                        color: lightblue
+                      - entity: calendar.family
+                        name: Family
+                        color: orange
+                    days: 2
+                    noCardBackground: true
+                    eventBackground: rgba(0,0,0,.1)
+                    texts:
+                      noEvents: No worries
+                      fullDay: All Day
+                      today: Today
+                      sunday: Sunday
+                      monday: Monday
+                      tuesday: Tuesday
+                      wednesday: Wednesday
+                      thursday: Thursday
+                      friday: Friday
+                      saturday: Saturday
+                      tomorrow: Tomorrow
+      - type: grid
+        cards:
+          - graph: line
+            type: sensor
+            entity: sensor.butterbox1_tds_tds_value
+            detail: 2
+            hours_to_show: 16
+            layout_options:
+              grid_columns: full
+              grid_rows: 2
+            theme: Material Rounded Transparent Card Dark
+          - chart_type: line
+            period: hour
+            type: statistics-graph
+            entities:
+              - sensor.apollo_air_1_bcd24c_co2
+            stat_types:
+              - mean
+              - min
+              - max
+            logarithmic_scale: true
+            hide_legend: true
+            title: Air Quality
+            days_to_show: 1
