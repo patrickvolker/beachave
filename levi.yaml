@@ -61,7 +61,6 @@ display:
     id: my_display
     model: S3BOX
     data_rate: 40MHz
-
     cs_pin: 5
     dc_pin: 4
     reset_pin:
