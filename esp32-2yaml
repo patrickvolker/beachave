@@ -1,0 +1,117 @@
+substitutions:
+  name: esp32-s3-box-3-2d9efc
+  friendly_name: Levi
+  background_illustration_file: https://raw.githubusercontent.com/patrickvolker/beachave/refs/heads/master/levi2.png
+
+esphome:
+  name: ${name}
+  name_add_mac_suffix: false
+  friendly_name: ${friendly_name}
+
+esp32:
+  board: esp32-s3-devkitc-1
+  framework:
+    type: arduino
+api:
+  encryption:
+    key: KaNJhqHQ6AfEvm/UvMCfjVDJ9l7A6XLVNqV/1P313jY=
+
+ota:
+  - platform: esphome
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  manual_ip: 
+    gateway: 192.168.86.1
+    static_ip: 192.168.86.26
+    subnet: 255.255.255.0
+
+output:
+  - platform: ledc
+    pin: GPIO47
+    id: lcd_backlight_pin
+logger:
+  level: INFO
+
+light:
+  - platform: monochromatic
+    output: lcd_backlight_pin
+    id: lcd_backlight
+    name: "LCD Backlight"
+    restore_mode: ALWAYS_ON
+
+i2c:
+  sda: GPIO41
+  scl: GPIO40
+
+spi:
+  clk_pin: GPIO7
+  mosi_pin: GPIO6
+  #miso_pin: 
+
+switch:
+  - platform: gpio
+    pin: GPIO48
+    name: LCD Reset
+    id: id_LCD_Reset
+
+display:
+  - platform: ili9xxx
+    model: S3BOX
+    dc_pin: GPIO4
+    cs_pin: GPIO5
+    color_order: rgb
+    invert_colors: true
+    #auto_clear_enabled: false
+    id: my_display
+    lambda: |-
+      it.fill(COLOR_BLACK);
+      it.image(0, 0, id(background_image));
+      it.printf(200, 10, id(font1), COLOR_WHITE, "%.f ppm", id(tds_value).state);
+
+
+image:
+  - file: ${background_illustration_file}
+    id: background_image
+
+font:
+  - file: "ostrich-regular.ttf"
+    id: font1
+    size: 55
+
+interval:
+  - interval: 500ms
+    then:
+      - component.update: my_display
+
+# thank you perplexity -- TDS sensor and integration
+sensor:
+  - platform: adc
+    pin: GPIO10
+    name: "TDS Sensor Raw"
+    update_interval: 40ms
+    attenuation: 12db
+    filters:
+      - median:
+          window_size: 30
+          send_every: 30
+          send_first_at: 1
+    on_value:
+      then:
+        - lambda: |-
+            float voltage = x * 3.3 / 4095.0;
+            float temperature = 22.0;
+            float compensationCoefficient = 1.0 + 0.02 * (temperature - 25.0);
+            float compensationVoltage = voltage / compensationCoefficient;
+            float tdsValue = (133.42 * compensationVoltage * compensationVoltage * compensationVoltage 
+                        - 255.86 * compensationVoltage * compensationVoltage 
+                        + 857.39 * compensationVoltage) * 0.5;
+            tdsValue *= 1000;  // Scale up by 1000
+            id(tds_value).publish_state(round(tdsValue));
+
+  - platform: template
+    name: "TDS Value"
+    id: tds_value
+    unit_of_measurement: "ppm"
+    update_interval: 20s
