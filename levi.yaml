@@ -7,7 +7,7 @@ provider:
     WIFI_PASSWORD: ${self:custom.secrets.WIFI_PASSWORD}
 
 substitutions:
-  background_illustration_file: https://github.com/patrickvolker/beachave/blob/master/levi.png
+  background_illustration_file: https://raw.githubusercontent.com/patrickvolker/beachave/refs/heads/master/levi2.png
 
 esphome:
   name: levi
@@ -72,9 +72,9 @@ display:
     update_interval: never
     invert_colors: false
     lambda: |-
-      it.fill(COLOR::BLACK);
+      it.fill(COLOR_WHITE);
       it.image(0, 0, id(background_image));
-      it.printf(180, 10, id(font1), COLOR::WHITE, "%.1f", id(tds_value).state);
+      it.printf(180, 10, id(font1), COLOR_BLACK, "%.1f", id(tds_value).state);
 
 image:
   - file: ${background_illustration_file}
@@ -83,9 +83,9 @@ image:
 
 #font?!
 font:
-  - file: "ostrich-regular.ttf"
+  - file: "Roboto-Black.ttf"
     id: font1
-    size: 20
+    size: 40
 
 interval:
   - interval: 5s

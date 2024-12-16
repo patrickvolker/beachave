@@ -13,10 +13,10 @@ views:
         cards:
           - type: custom:tabbed-card
             styles:
-              "--mdc-tab-text-label-color-default": gray
-              "--mdc-tab-height": 64px
-              "--mdc-tab-horizontal-padding": none
-              "--mdc-tab-color-default": rgba(255, 197, 0, 0.99)
+              '--mdc-tab-text-label-color-default': gray
+              '--mdc-tab-height': 64px
+              '--mdc-tab-horizontal-padding': none
+              '--mdc-tab-color-default': rgba(255, 197, 0, 0.99)
             options?:
               defaultTabIndex?: 1
             tabs:
@@ -25,10 +25,19 @@ views:
                   columns: 2
                   type: grid
                   cards:
-                    - type: media-control
+                    - type: custom:mini-media-player
                       entity: media_player.front_room_speaker
                       name: Speaker
+                      icon: mdi:waveform
+                      icon_height: 20px
                       show_state: null
+                      artwork: cover
+                      info: scroll
+                      replace_mute: null
+                      hide:
+                        power: true
+                      idle:
+                        when_idle: true
                     - type: button
                       entity: script.front_room_toggler
                       name: Front Room [All]
@@ -81,9 +90,19 @@ views:
                   columns: 2
                   type: grid
                   cards:
-                    - type: media-control
+                    - type: custom:mini-media-player
                       entity: media_player.kitchen_display
                       name: Display
+                      icon: mdi:waveform
+                      icon_height: 20px
+                      show_state: null
+                      artwork: cover
+                      info: scroll
+                      replace_mute: null
+                      hide:
+                        power: true
+                      idle:
+                        when_idle: true
                     - type: button
                       entity: script.kitchen_toggler
                       name: Kitchen Ceiling
@@ -102,6 +121,15 @@ views:
                       tap_action:
                         action: toggle
                     - type: button
+                      entity: script.dining_dimmer
+                      name: Dining Dimmer
+                      icon: mdi:candle
+                      icon_height: 20px
+                      hold_action:
+                        action: more-info
+                      tap_action:
+                        action: toggle
+                    - type: button
                       tap_action:
                         action: call-service
                         service: vacuum.send_command
@@ -110,7 +138,7 @@ views:
                           params:
                             pmap_id: NlrYuIbRSwCiPnadv2jRHg
                             regions:
-                              - region_id: "1"
+                              - region_id: '1'
                         target:
                           entity_id: vacuum.roomba
                       name: Clean Kitchen
@@ -125,9 +153,19 @@ views:
                   columns: 2
                   type: grid
                   cards:
-                    - type: media-control
+                    - type: custom:mini-media-player
                       entity: media_player.living_room_tv_3
                       name: TV
+                      icon: mdi:television-classic
+                      icon_height: 20px
+                      show_state: null
+                      artwork: cover
+                      info: scroll
+                      replace_mute: null
+                      hide:
+                        power: true
+                      idle:
+                        when_idle: true
                     - type: tile
                       entity: light.living_room_tv_strip
                       name: Lightstrip
@@ -160,10 +198,10 @@ views:
         cards:
           - type: custom:tabbed-card
             styles:
-              "--mdc-tab-text-label-color-default": gray
-              "--mdc-tab-height": 64px
-              "--mdc-tab-horizontal-padding": none
-              "--mdc-tab-color-default": rgba(255, 197, 0, 0.99)
+              '--mdc-tab-text-label-color-default': gray
+              '--mdc-tab-height': 64px
+              '--mdc-tab-horizontal-padding': none
+              '--mdc-tab-color-default': rgba(255, 197, 0, 0.99)
             options?:
               defaultTabIndex?: 1
             tabs:
@@ -246,6 +284,19 @@ views:
                       hold_action:
                         action: more-info
                       icon_height: 20px
+                    - type: custom:mini-media-player
+                      entity: media_player.phoenix
+                      name: Yoto
+                      icon: mdi:robot-happy
+                      icon_height: 20px
+                      show_state: null
+                      artwork: cover
+                      info: scroll
+                      replace_mute: null
+                      hide:
+                        power: true
+                      idle:
+                        when_idle: true
                 attributes:
                   label: BWV HQ
               - card:
@@ -277,10 +328,10 @@ views:
         cards:
           - type: custom:tabbed-card
             styles:
-              "--mdc-tab-text-label-color-default": gray
-              "--mdc-tab-height": 64px
-              "--mdc-tab-horizontal-padding": none
-              "--mdc-tab-color-default": rgba(255, 197, 0, 0.99)
+              '--mdc-tab-text-label-color-default': gray
+              '--mdc-tab-height': 64px
+              '--mdc-tab-horizontal-padding': none
+              '--mdc-tab-color-default': rgba(255, 197, 0, 0.99)
             options?:
               defaultTabIndex?: 1
             tabs:
@@ -289,11 +340,20 @@ views:
                   columns: 2
                   type: grid
                   cards:
-                    - type: media-control
+                    - type: custom:mini-media-player
                       entity: media_player.basement_speaker
                       name: Speaker
                       icon_height: 20px
-                    - type: media-control
+                      icon: mdi:waveform
+                      show_state: null
+                      artwork: cover
+                      info: scroll
+                      replace_mute: null
+                      hide:
+                        power: true
+                      idle:
+                        when_idle: true
+                    - type: custom:mini-media-player
                       entity: media_player.basement_tv
                       name: Projector
                       tap_action:
@@ -301,6 +361,15 @@ views:
                       hold_action:
                         action: more-info
                       icon_height: 20px
+                      icon: mdi:filmstrip
+                      show_state: null
+                      artwork: cover
+                      info: scroll
+                      replace_mute: null
+                      hide:
+                        power: true
+                      idle:
+                        when_idle: true
                     - type: tile
                       entity: switch.basement_christmas_lights
                       name: Christmas Lights
@@ -340,15 +409,23 @@ views:
                   columns: 2
                   type: grid
                   cards:
-                    - type: media-control
+                    - type: custom:mini-media-player
                       entity: media_player.office_monitor
                       name: Monitor
-                      icon: mdi:monitor-screenshot
+                      icon: mdi:apple
                       tap_action:
                         action: toggle
                       hold_action:
                         action: more-info
                       icon_height: 20px
+                      show_state: null
+                      artwork: cover
+                      info: scroll
+                      replace_mute: null
+                      hide:
+                        power: true
+                      idle:
+                        when_idle: true
                     - type: tile
                       entity: switch.office_christmas_lights
                       name: Christmas Lights
@@ -457,7 +534,7 @@ views:
                       icon_height: 20px
                     - type: tile
                       entity: light.garage_1
-                      name: Left
+                      name: Garage Left
                       icon: mdi:wall-sconce
                       tap_action:
                         action: toggle
@@ -466,7 +543,7 @@ views:
                       icon_height: 20px
                     - type: tile
                       entity: light.garage_2
-                      name: Right
+                      name: Garage Right
                       icon: mdi:wall-sconce
                       tap_action:
                         action: toggle
@@ -511,6 +588,12 @@ views:
                       tomorrow: Tomorrow
       - type: grid
         cards:
+          - show_state: false
+            show_name: false
+            camera_view: live
+            type: picture-entity
+            entity: camera.pixel_7_cam
+            theme: Material Rounded Transparent Card
           - graph: line
             type: sensor
             entity: sensor.butterbox1_tds_tds_value
